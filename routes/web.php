@@ -11,4 +11,5 @@ Route::get('/posts', function () {
     return view('posts.index');
 });
 
-Route::get('/register', [RegisterController::class, 'Index']);
+Route::get('/register', [RegisterController::class, 'Index'])->name('register');
+Route::post('/register', [RegisterController::class, 'Store']);
