@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+
 
 class RegisterController extends Controller
 {
@@ -11,8 +13,13 @@ class RegisterController extends Controller
         return view('auth.register');
     }
 
-    public  function Store()
+    public  function Store(Request $request)
     {
-        dd('abc');
+        $request->validate([
+            'name' => ['required', 'max:255'],
+            'username' => ['required', 'max:255'],
+            'email' => ['required', 'email'],
+            'password' => ['required', 'confirmed']
+        ]);
     }
 }
