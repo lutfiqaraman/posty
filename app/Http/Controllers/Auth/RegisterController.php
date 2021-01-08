@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
@@ -13,7 +15,7 @@ class RegisterController extends Controller
         return view('auth.register');
     }
 
-    public  function Store(Request $request)
+    public function Store(Request $request): RedirectResponse
     {
         $request->validate([
             'name' => ['required', 'max:255'],
@@ -21,5 +23,14 @@ class RegisterController extends Controller
             'email' => ['required', 'email'],
             'password' => ['required', 'confirmed']
         ]);
+        
+        User::create([
+            'name' => $request->input('name'),
+            'username' => $request->input('username'),
+            'email' => $request->input('email'),
+            'password' => Hash::make($request->input('password'))
+        ]);
+
+        return redirect()->route('dashboard');
     }
 }
