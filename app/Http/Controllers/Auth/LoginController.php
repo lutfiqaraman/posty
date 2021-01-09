@@ -8,6 +8,15 @@ use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
+
+    /**
+     * LoginController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware(['guest']);
+    }
+
     public function Index()
     {
         return view('auth.login');
