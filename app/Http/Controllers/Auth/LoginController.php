@@ -8,12 +8,12 @@ use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
-    public function index()
+    public function Index()
     {
         return view('auth.login');
     }
 
-    public function store(Request $request): RedirectResponse
+    public function Store(Request $request): RedirectResponse
     {
         $request->validate([
             'email' => ['required', 'email'],
