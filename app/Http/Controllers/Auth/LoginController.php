@@ -24,12 +24,15 @@ class LoginController extends Controller
 
     public function Store(Request $request): RedirectResponse
     {
+        $loginInfo = $request->only('email', 'password');
+        $remember  = $request->input('remember');
+
         $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required']
         ]);
 
-        if (!auth()->attempt($request->only('email', 'password'))) {
+        if (!auth()->attempt($loginInfo, $remember)) {
             return back()->with('status', 'Invalid login details');
         }
 
