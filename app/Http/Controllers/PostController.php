@@ -23,9 +23,9 @@ class PostController extends Controller
             dd($e);
         }
 
-        $request->user()->posts()->create([
-            'body' => $request->input('body')
-        ]);
+        $request->user()->posts()->create(
+            $request->only('body')
+        );
 
         return back();
     }
