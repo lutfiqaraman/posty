@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Post;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class PostController extends Controller
 {
@@ -15,13 +15,18 @@ class PostController extends Controller
 
     public function Store(Request $request): RedirectResponse
     {
-        $this->validate($request, [
-           'body' => 'required'
+        try {
+            $this->validate($request, [
+                'body' => 'required'
+            ]);
+        } catch (ValidationException $e) {
+            dd($e);
+        }
+
+        $request->user()->posts()->create([
+            'body' => $request->input('body')
         ]);
 
-        Post::create([
-            'user_id'=> auth()->id(),
-            'body'=> $request->input('body')
-        ]);
+        return back();
     }
 }
