@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
@@ -10,7 +11,10 @@ class PostController extends Controller
 {
     public function Index()
     {
-        return view('posts.index');
+        $posts = Post::get();
+        return view('posts.index', [
+            'posts' => $posts
+        ]);
     }
 
     public function Store(Request $request): RedirectResponse
