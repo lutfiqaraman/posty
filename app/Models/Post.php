@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @method static get()
+ * @method static paginate(int $number_of_articles_per_page)
  */
 class Post extends Model
 {
