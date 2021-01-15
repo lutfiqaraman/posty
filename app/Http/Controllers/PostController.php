@@ -37,11 +37,7 @@ class PostController extends Controller
 
     public function Destroy(Post $post): RedirectResponse
     {
-        if ($post->ownedBy(auth()->user()))
-        {
-            dd('you do not owen this article, so you cannot delete it');
-        }
-
+        $this->authorize('delete', $post);
         $post->delete();
         return back();
     }

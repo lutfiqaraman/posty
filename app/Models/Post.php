@@ -21,11 +21,6 @@ class Post extends Model
         'body'
     ];
 
-    public function ownedBy(User $user): bool
-    {
-        return $user->id == $this->user_id;
-    }
-
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
