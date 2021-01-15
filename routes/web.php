@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PostLikeController;
+use App\Http\Controllers\UserPostController;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\Auth\RegisterController;
 use \App\Http\Controllers\Auth\LoginController;
@@ -31,3 +32,5 @@ Route::post('/posts', [PostController::class, 'Store']);
 Route::delete('/posts/{post}', [PostController::class, 'Destroy'])->name('posts.destroy');
 
 Route::post('/posts/{post}/likes', [PostLikeController::class, 'Store'])->name('posts.likes');
+
+Route::get('/users/{user:username}/posts', [UserPostController::class, 'Index'])->name('users.posts');
