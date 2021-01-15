@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @method static get()
- * @method static paginate(int $number_of_articles_per_page)
+ * @method static paginate(int $posts)
  * @property mixed user_id
  */
 class Post extends Model
