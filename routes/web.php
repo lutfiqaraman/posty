@@ -28,6 +28,7 @@ Route::get('/register', [RegisterController::class, 'Index'])->name('register');
 Route::post('/register', [RegisterController::class, 'Store']);
 
 Route::get('/posts', [PostController::class, 'Index'])->name('posts');
+Route::get('/posts/{post}', [PostController::class, 'Show'])->name('posts.show');
 Route::post('/posts', [PostController::class, 'Store']);
 Route::delete('/posts/{post}', [PostController::class, 'Destroy'])->name('posts.destroy');
 

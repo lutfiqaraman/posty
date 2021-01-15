@@ -18,6 +18,13 @@ class PostController extends Controller
         ]);
     }
 
+    public function Show(Post $post)
+    {
+        return view('posts.show', [
+            'post' => $post
+        ]);
+    }
+
     public function Store(Request $request): RedirectResponse
     {
         try {
