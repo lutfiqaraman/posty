@@ -11,7 +11,7 @@ class PostController extends Controller
 {
     public function Index()
     {
-        $posts = Post::with(['user', 'likes'])->paginate(10);
+        $posts = Post::latest()->with(['user', 'likes'])->paginate(10);
 
         return view('posts.index', [
             'posts' => $posts
@@ -37,6 +37,11 @@ class PostController extends Controller
 
     public function Destroy(Post $post): RedirectResponse
     {
+        if ($post->ownedBy(auth()->user()))
+        {
+            dd('you do not owen this article, so you cannot delete it');
+        }
+
         $post->delete();
         return back();
     }

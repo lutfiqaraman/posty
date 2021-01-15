@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 /**
  * @method static get()
  * @method static paginate(int $posts)
+ * @method static latest()
  * @property mixed user_id
  */
 class Post extends Model
@@ -19,6 +20,11 @@ class Post extends Model
     protected $fillable = [
         'body'
     ];
+
+    public function ownedBy(User $user): bool
+    {
+        return $user->id == $this->user_id;
+    }
 
     public function user(): BelongsTo
     {
