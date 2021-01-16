@@ -9,6 +9,15 @@ use Illuminate\Validation\ValidationException;
 
 class PostController extends Controller
 {
+
+    /**
+     * PostController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware(['auth'])->only(['store', 'destroy']);
+    }
+
     public function Index()
     {
         $posts = Post::latest()->with(['user', 'likes'])->paginate(10);
